@@ -77,6 +77,6 @@ fi
 TMPFILE=`mktemp`
 print_all_digraph > $TMPFILE
 # generate image
-dot -Tpng ~/tmp/dependencies.dot -o $OUTPUT_FILE
+dot -Tpng $TMPFILE -o $OUTPUT_FILE
 #
 echo "output file: $OUTPUT_FILE"
