@@ -37,6 +37,11 @@
 #       Note: the [count] value == 1 means that the function is only defined
 #             but never used.
 #
+#       Note: to exclude function_source from the count:
+#
+#       /path/to/find_function_not_used.sh function_source where_look no
+#
+#
 # >>> Install
 #
 #  note: you need to install GraphViz
@@ -51,12 +56,17 @@ fi
 usage_graph(){
   FUNCTION_SOURCE=$1
   WHERE_LOOK=$2
+  NO_COUNT_SOURCE=$3
   function_list=`git grep "def \w*(" $FUNCTION_SOURCE | awk -F":" '{print $2}' | awk '{print $2}' | awk -F"(" '{print $1}' | sort -u`
   for fun in $function_list; do
-     USAGE_COUNT=`git grep "$fun(" | wc -l`
-     echo -e "$USAGE_COUNT\t$fun"
+    if [ -z "$NO_COUNT_SOURCE" ]; then
+       USAGE_COUNT=`git grep "$fun(" | wc -l`
+    else
+       USAGE_COUNT=`git grep "$fun(" -- "$WHERE_LOOK" ":!$FUNCTION_SOURCE" | wc -l`
+    fi
+    echo -e "$USAGE_COUNT\t$fun"
   done
 }
 
 # generate list "[count] [function_name]"
-usage_graph $1 $2
+usage_graph $1 $2 $3
