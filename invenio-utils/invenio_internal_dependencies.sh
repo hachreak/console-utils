@@ -26,7 +26,7 @@
 # >>> Usage
 #
 #  $> cd /src/invenio
-#  $> /path/to/invenio-dependencies.sh deps.png
+#  $> /path/to/invenio_internal_dependencies.sh deps.png
 #
 #  note: you need to install GraphViz
 
