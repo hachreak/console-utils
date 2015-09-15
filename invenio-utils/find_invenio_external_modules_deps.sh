@@ -53,7 +53,7 @@ print_digraph(){
       if [ -n "$DEPS" ]; then
         for j in $DEPS; do
           if [ "$SRC" != "$j" ]; then
-            echo "\t$SRC -> $j"
+            echo -e "\t$SRC -> $j"
           fi
         done
       fi
