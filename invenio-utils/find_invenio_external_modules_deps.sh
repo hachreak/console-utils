@@ -36,11 +36,11 @@
 HOME=`pwd`
 
 find_deps(){
-  git grep -P "^( +)from invenio" -- '*.py' | grep -v ^tests | grep -v ^docs | awk -F: '{print $2}' | sed -e 's/^[ \t]*//' | awk '{print $2}' | awk -F"." '{print $1}' | sort -u
+  git grep -P "^( *)from invenio" -- '*.py' | grep -v ^tests | grep -v ^docs | awk -F: '{print $2}' | sed -e 's/^[ \t]*//' | awk '{print $2}' | awk -F"." '{print $1}' | sort -u
 }
 
 get_src_pkg_name(){
-  git grep -P "^( +)from invenio" -- '*.py' | grep -v ^tests | grep -v ^docs | awk -F"/" '{print $1}' | head -n1
+  git grep -P "^( *)from invenio" -- '*.py' | grep -v ^tests | grep -v ^docs | awk -F"/" '{print $1}' | head -n1
 }
 
 print_digraph(){
